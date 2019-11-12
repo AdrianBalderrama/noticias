@@ -13,7 +13,9 @@
         *ngFor= "let noticia of noticias">
           <ion-card color="dark">
             <ion-card-header>
-            <ion-card-subtitle>{{noticia.source.name}}</ion-card-subtitle>
+            <ion-card-subtitle>
+             <span class= "noticia-source-name"> {{noticia.source.name}} </span>
+            </ion-card-subtitle>
             <ion-card-title>{{noticia.title}}</ion-card-title>
             <ion-img *ngIf="noticia.urlToImage" [src]=noticia.urlToImage></ion-img>
             </ion-card-header>
