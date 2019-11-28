@@ -4,6 +4,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
  
 import { ActionSheetController } from '@ionic/angular';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { DataLocalService } from 'src/app/services/data-local.service';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class NoticiaComponent implements OnInit {
   @Input() noticia: Article;
   
 
-  constructor(private iab: InAppBrowser,private actionSheetCtrl: ActionSheetController, private socialSharing: SocialSharing) {
+  constructor(private iab: InAppBrowser,private actionSheetCtrl: ActionSheetController,
+     private socialSharing: SocialSharing, private datalocalService: DataLocalService) {
 
    }
 
@@ -52,6 +54,7 @@ export class NoticiaComponent implements OnInit {
         cssClass: 'action-dark',
         handler: () => {
           console.log('Favorite clicked');
+          this.datalocalService.guardarNoticia(this.noticia);
         }
       }, {
         text: 'Cancelar',
