@@ -10,7 +10,8 @@ import { Article } from 'src/app/interfaces/interfaces';
 })
 export class Tab2Page implements OnInit {
   
-  @ViewChild(IonSegment) segment: IonSegment;
+  //static true is due this new ver ask for 2 params
+  @ViewChild(IonSegment,{static: true}) segment: IonSegment;  
   
   
 categorias = ['entertainment', 'sports','technology', 'business', 'science', 'health'];
@@ -30,12 +31,22 @@ ngOnInit(){
      this.cargarNoticias(event.detail.value);
   }
 
-  cargarNoticias(categoria:string){
+  cargarNoticias(categoria:string, event?){
      
     this.noticiasService.getTopHeadlinesCategoria(categoria)
     .subscribe( resp =>{
        console.log(resp);
        this.noticias.push(...resp.articles);
+       //si existe el evento llamamos
+       if(event){
+         event.target.complete();
+       }
+      
     });
+  }
+
+
+  loadData(event){
+    this.cargarNoticias(this.segment.value);
   }
 }

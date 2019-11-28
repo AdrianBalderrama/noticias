@@ -3,8 +3,8 @@
   <ion-card-subtitle>
    <span class= "noticia-source-name"> {{noticia.source.name}} </span>
   </ion-card-subtitle>
-  <ion-card-title>{{noticia.title}}</ion-card-title>
-  <ion-img *ngIf="noticia.urlToImage" [src]=noticia.urlToImage></ion-img>
+  <ion-card-title (click)= "abrirNoticia()">{{noticia.title}}</ion-card-title>
+  <ion-img *ngIf="noticia.urlToImage" (click)= "abrirNoticia()" [src]=noticia.urlToImage></ion-img>
   </ion-card-header>
   <ion-card-content>
     <p>

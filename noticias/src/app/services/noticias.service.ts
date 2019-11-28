@@ -16,6 +16,8 @@ const headers = new HttpHeaders({
 export class NoticiasService {
 
   headlinesPage=0;
+  categoriaActual = "";
+  categoriaPage=0;
 
   constructor(private http:HttpClient) { }
 
@@ -31,9 +33,17 @@ export class NoticiasService {
   }
 
   getTopHeadlinesCategoria( categoria: string){
+    //to add the page number to load in categorias
+    if (this.categoriaActual===categoria){
+      this.categoriaPage++;
+    } else{
+      this.categoriaPage=1;
+      this.categoriaActual = categoria;
+    }
+
     //return console.log("this.ejecutarQuery('/top-headlines?country=US')")
 
-    return this.ejecutarQuery<RespuestaTopHeadlines>('/top-headlines?country=mx&category='+(categoria));
+    return this.ejecutarQuery<RespuestaTopHeadlines>('/top-headlines?country=mx&category='+(categoria)+"&page="+this.categoriaPage);
    }
 
 
