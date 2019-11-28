@@ -11,14 +11,16 @@ export class DataLocalService {
   constructor(private storage: Storage) { }
 
   guardarNoticia(noticia: Article){
-    //const existe = this.noticias.find( noti => noti.title === noticia.title);
-//if(!existe){
-    this.noticias.unshift(noticia);
-    this.storage.set('Favoritos', noticia);
-    console.log(noticia);
-//}
 
+    const existe = this.noticias.find( noti => noti.title === noticia.title );
+
+   if (!existe) {
+      this.noticias.unshift(noticia);
+      this.storage.set('favoritos', this.noticias );
+    } else{
+    console.log('Noticia repetida:', this.noticias)}
   }
+  
 
   cargarFavoritos(){
 
