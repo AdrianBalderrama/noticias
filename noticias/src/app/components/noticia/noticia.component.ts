@@ -14,6 +14,7 @@ import { DataLocalService } from 'src/app/services/data-local.service';
 })
 export class NoticiaComponent implements OnInit {
   @Input() noticia: Article;
+  @Input() enFavoritos;
   
 
   constructor(private iab: InAppBrowser,private actionSheetCtrl: ActionSheetController,
@@ -31,7 +32,37 @@ export class NoticiaComponent implements OnInit {
   }
 
 
-  async lanzarMenu(){   
+  async lanzarMenu(){  
+    
+    let guardarborrarBtn;
+
+    if (this.enFavoritos){
+    //borrar favs
+    guardarborrarBtn = {
+      text: 'Borrar de Favorito',
+      icon: 'trash',
+      cssClass: 'action-dark',
+      handler: () => {
+        console.log('Borrar Fav clicked');
+        this.datalocalService.borrarNoticia(this.noticia);
+      }
+    };
+
+
+    } else{
+     guardarborrarBtn = {
+        text: 'Favoritos',
+        icon: 'star',
+        cssClass: 'action-dark',
+        handler: () => {
+          console.log('Favorite clicked');
+          this.datalocalService.guardarNoticia(this.noticia);
+        }
+      };
+    }
+
+
+
     const actionSheet = await this.actionSheetCtrl.create({
       
       buttons: [{
@@ -48,15 +79,7 @@ export class NoticiaComponent implements OnInit {
             
           );
         }
-      },  {
-        text: 'Favoritos',
-        icon: 'star',
-        cssClass: 'action-dark',
-        handler: () => {
-          console.log('Favorite clicked');
-          this.datalocalService.guardarNoticia(this.noticia);
-        }
-      }, {
+      }, guardarborrarBtn,   {
         text: 'Cancelar',
         icon: 'close',
         cssClass: 'action-dark',

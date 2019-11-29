@@ -8,9 +8,12 @@
 
 
 <ion-content color="dark">
-  
+<!-- Agrega estilos despues, se ve bien feo esto, y en general todo-->
 <div class="NAfavs" *ngIf="datalocalService.noticias.length===0"> 
     No hay Favoritos
   </div>
-  <app-noticias [noticias]="datalocalService.noticias" *ngIf="datalocalService.noticias.length>0"></app-noticias>
+  <app-noticias [noticias]="datalocalService.noticias" 
+  *ngIf="datalocalService.noticias.length>0"
+  [enFavoritos]= "true"
+  ></app-noticias>
 </ion-content>
