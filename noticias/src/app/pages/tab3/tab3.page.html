@@ -6,4 +6,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="dark"></ion-content>
+
+<ion-content color="dark">
+  
+<div class="NAfavs" *ngIf="datalocalService.noticias.length===0"> 
+    No hay Favoritos
+  </div>
+  <app-noticias [noticias]="datalocalService.noticias" *ngIf="datalocalService.noticias.length>0"></app-noticias>
+</ion-content>
